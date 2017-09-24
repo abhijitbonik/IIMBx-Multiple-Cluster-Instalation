@@ -1,6 +1,8 @@
 
 #making the gui promt of mysql instalation non interactive
 #and provide the password on debconf-set-selections
+sudo -S <<< $1 apt-get update
+sudo -S <<< $1 apt-get install -y debconf
 export DEBIAN_FRONTEND="noninteractive"
 
 sudo -S <<< $1 debconf-set-selections <<< "mysql-server mysql-server/root_password password root"
