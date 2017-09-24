@@ -43,35 +43,35 @@ sudo -S <<< "$currsyspassword" apt-get install sshpass
 sshpass -p "$mysqlpassword" scp mysql.sh $mysqlusername@$mysqlipaddress:~/ 
 
 #run the script  on mysql server.
-sshpass -p "$mysqlpassword" ssh $mysqlusername@$mysqlipaddress /home/edx/mysql.sh $mysqlpassword
+sshpass -p "$mysqlpassword" ssh $mysqlusername@$mysqlipaddress /home/$mysqlusername/mysql.sh $mysqlpassword
 
 #Copy the script to web 1
 sshpass -p "$web1password" scp web.sh $web1username@$web1ipaddress:~/ 
 
 #Execute the script on web 1
-sshpass -p "$web1password" ssh $web1username@$web1ipaddress /home/edx/web.sh $web1password
+sshpass -p "$web1password" ssh $web1username@$web1ipaddress /home/$web1username/web.sh $web1password
 
 #Copy the script to web 2
 sshpass -p "$web2password" scp web.sh $web2username@$web2ipaddress:~/ 
 
 #Execute the script on web 2
-sshpass -p "$web2password" ssh $web2username@$web2ipaddress /home/edx/web.sh $web2password
+sshpass -p "$web2password" ssh $web2username@$web2ipaddress /home/$web2username/web.sh $web2password
 
 #Copy the script to haproxy server
 sshpass -p "$haproxypassword" scp haproxy.sh $haproxyusername@haproxyipaddress:~/ 
 
 #Execute the script on haproxy server
-sshpass -p "$haproxypassword" ssh $haproxyusername@haproxyipaddress /home/edx/haproxy.sh $haproxypassword $web1ipaddress $web2ipaddress
+sshpass -p "$haproxypassword" ssh $haproxyusername@haproxyipaddress /home/$haproxyusername/haproxy.sh $haproxypassword $web1ipaddress $web2ipaddress
 
 
 #Copy the script to nfs server
 sshpass -p "$web2password" scp nfs_server.sh $web2username@$web2ipaddress:~/ 
 
 #Execute the script in nfs server 
-sshpass -p "$web2password" ssh $web2username@$web2ipaddress /home/edx/nfs_server.sh $web2password $web2ipaddress
+sshpass -p "$web2password" ssh $web2username@$web2ipaddress /home/$web2username/nfs_server.sh $web2password $web2ipaddress
 
 #Copy the script to nfs client
 sshpass -p "$web1password" scp nfs_client.sh $web1username@$web1ipaddress:~/ 
 
 #Execute the script on nfs client 
-sshpass -p "$web1password" ssh $web1username@$web1ipaddress /home/edx/nfs_client.sh $web1password $web1ipaddress
+sshpass -p "$web1password" ssh $web1username@$web1ipaddress /home/$web1username/nfs_client.sh $web1password $web1ipaddress
