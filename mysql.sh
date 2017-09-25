@@ -27,7 +27,7 @@ sudo -S <<< $1 sed -i 's/bind-address\s*=.*/#bind-address		= 127.0.0.1/g' /etc/m
 
 #for now please change the ip address with web 1 and web 2 ipddress
 echo "Setting Permission for web 1"
-mysql -uroot -proot -e " GRANT ALL ON *.* TO root@'10.129.26.103' IDENTIFIED BY 'edx123';"
+mysql -uroot -proot -e " GRANT ALL ON *.* TO root@'10.129.26.103' IDENTIFIED BY 'root';"
 
 echo "Setting permisiion for Web2"
-mysql -uroot -proot -e " GRANT ALL ON *.* TO root@'10.129.26.103' IDENTIFIED BY 'edx123';"
+mysql -uroot -proot -e " GRANT ALL ON *.* TO root@'10.129.26.103' IDENTIFIED BY 'root';"
