@@ -14,7 +14,7 @@ sudo -S <<< $1 apt-get --yes install php7.0-curl php-mcrypt
 
 #acttivating the firewall using Apache Full protection
 echo "Applying Apache Full firewall"
-ufw allow in "Apache Full"
+sudo -S <<< $1 ufw allow in "Apache Full"
 
 #The following command will replace a line so that the server can access the index.php from root location
 sudo -S <<< $1 sed -i '/DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm/c\DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm' /etc/apache2/mods-available/dir.conf
@@ -32,6 +32,9 @@ sudo -S <<< $1 a2enmod rewrite
 
 #it will add the servername name and override all permission in the virtual host
 sudo -S <<< $1 sed -i '/#ServerName www.example.com/c\\t ServerName  localhost' /etc/apache2/sites-available/000-default.conf
+
+#adding root to /var/www/html/iimbx
+sudo -S <<< $1 sed -i '/DocumentRoot /var/www/html/c\\t DocumentRoot /var/www/html/iimbx' /etc/apache2/sites-available/000-default.conf
 
 sudo -S <<< $1 sed -i '13 a \\t <Directory /var/www/html>' /etc/apache2/sites-available/000-default.conf
 sudo -S <<< $1 sed -i '14 a \\t\t	AllowOverride All' /etc/apache2/sites-available/000-default.conf
