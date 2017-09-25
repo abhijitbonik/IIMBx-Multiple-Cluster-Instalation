@@ -40,7 +40,10 @@ read -s haproxypassword
 sudo -S <<< "$currsyspassword" apt-get install sshpass
 
 #Copy the script to be executed on mysql server
-sshpass -p "$mysqlpassword" scp mysql.sh $mysqlusername@$mysqlipaddress:~/ 
+sshpass -p "$mysqlpassword" scp mysql.sh $mysqlusername@$mysqlipaddress:~/
+
+#changing mysql file permission on a remote machine 
+sshpass -p "$mysqlpassword" ssh $mysqlusername@$mysqlipaddress chmod 777 /home/$mysqlusername/mysql.sh
 
 #run the script  on mysql server.
 sshpass -p "$mysqlpassword" ssh $mysqlusername@$mysqlipaddress /home/$mysqlusername/mysql.sh $mysqlpassword
@@ -48,30 +51,45 @@ sshpass -p "$mysqlpassword" ssh $mysqlusername@$mysqlipaddress /home/$mysqlusern
 #Copy the script to web 1
 sshpass -p "$web1password" scp web.sh $web1username@$web1ipaddress:~/ 
 
+#changing the file permission 
+sshpass -p "$web1password" ssh $web1username@$web1ipaddress chmod 777 /home/$web1username/web.sh
+
 #Execute the script on web 1
 sshpass -p "$web1password" ssh $web1username@$web1ipaddress /home/$web1username/web.sh $web1password
 
 #Copy the script to web 2
 sshpass -p "$web2password" scp web.sh $web2username@$web2ipaddress:~/ 
 
+#changing file permission
+sshpass -p "$web2password" ssh $web2username@$web2ipaddress chmod 777 /home/$web2username/web.sh
+
 #Execute the script on web 2
 sshpass -p "$web2password" ssh $web2username@$web2ipaddress /home/$web2username/web.sh $web2password
 
 #Copy the script to haproxy server
-sshpass -p "$haproxypassword" scp haproxy.sh $haproxyusername@haproxyipaddress:~/ 
+sshpass -p "$haproxypassword" scp haproxy.sh $haproxyusername@$haproxyipaddress:~/ 
+
+#changing the permission
+sshpass -p "$haproxypassword" ssh $haproxyusername@$haproxyipaddress chmod 777 /home/$haproxyusername/haproxy.sh
 
 #Execute the script on haproxy server
-sshpass -p "$haproxypassword" ssh $haproxyusername@haproxyipaddress /home/$haproxyusername/haproxy.sh $haproxypassword $web1ipaddress $web2ipaddress
+sshpass -p "$haproxypassword" ssh $haproxyusername@$haproxyipaddress /home/$haproxyusername/haproxy.sh $haproxypassword $web1ipaddress $web2ipaddress
 
 
 #Copy the script to nfs server
-sshpass -p "$web2password" scp nfs_server.sh $web2username@$web2ipaddress:~/ 
+sshpass -p "$web2password" scp nfs_server.sh $web2username@$web2ipaddress:~/
+
+#changing file permission
+sshpass -p "$web2password" ssh $web2username@$web2ipaddress chmod 777 /home/$web2username/nfs_server.sh
 
 #Execute the script in nfs server 
 sshpass -p "$web2password" ssh $web2username@$web2ipaddress /home/$web2username/nfs_server.sh $web2password $web2ipaddress
 
 #Copy the script to nfs client
-sshpass -p "$web1password" scp nfs_client.sh $web1username@$web1ipaddress:~/ 
+sshpass -p "$web1password" scp nfs_client.sh $web1username@$web1ipaddress:~/
+
+#chnaging the file permission on a remote machine
+sshpass -p "$web1password" ssh $web1username@$web1ipaddress chmod 777 /home/$web1username/nfs_client.sh
 
 #Execute the script on nfs client 
 sshpass -p "$web1password" ssh $web1username@$web1ipaddress /home/$web1username/nfs_client.sh $web1password $web1ipaddress
