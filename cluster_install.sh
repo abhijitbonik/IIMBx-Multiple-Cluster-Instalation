@@ -83,7 +83,7 @@ sshpass -p "$web2password" scp nfs_server.sh $web2username@$web2ipaddress:~/
 sshpass -p "$web2password" ssh $web2username@$web2ipaddress chmod 777 /home/$web2username/nfs_server.sh
 
 #Execute the script in nfs server 
-sshpass -p "$web2password" ssh $web2username@$web2ipaddress /home/$web2username/nfs_server.sh $web2password $web2ipaddress
+sshpass -p "$web2password" ssh $web2username@$web2ipaddress /home/$web2username/nfs_server.sh $web2password $web1ipaddress
 
 #Copy the script to nfs client
 sshpass -p "$web1password" scp nfs_client.sh $web1username@$web1ipaddress:~/
@@ -92,4 +92,4 @@ sshpass -p "$web1password" scp nfs_client.sh $web1username@$web1ipaddress:~/
 sshpass -p "$web1password" ssh $web1username@$web1ipaddress chmod 777 /home/$web1username/nfs_client.sh
 
 #Execute the script on nfs client 
-sshpass -p "$web1password" ssh $web1username@$web1ipaddress /home/$web1username/nfs_client.sh $web1password $web1ipaddress
+sshpass -p "$web1password" ssh $web1username@$web1ipaddress /home/$web1username/nfs_client.sh $web1password $web2ipaddress
