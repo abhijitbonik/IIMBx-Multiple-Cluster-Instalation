@@ -34,7 +34,7 @@ sudo -S <<< $1 a2enmod rewrite
 sudo -S <<< $1 sed -i '/#ServerName www.example.com/c\\t ServerName  localhost' /etc/apache2/sites-available/000-default.conf
 
 #adding root to /var/www/html/iimbx
-sudo -S <<< $1 sed -i '/DocumentRoot /var/www/html/c\\t DocumentRoot /var/www/html/iimbx' /etc/apache2/sites-available/000-default.conf
+sudo -S <<< $1 sed -i '/DocumentRoot/c\\t DocumentRoot /var/www/html/iimbx' /etc/apache2/sites-available/000-default.conf
 
 sudo -S <<< $1 sed -i '13 a \\t <Directory /var/www/html>' /etc/apache2/sites-available/000-default.conf
 sudo -S <<< $1 sed -i '14 a \\t\t	AllowOverride All' /etc/apache2/sites-available/000-default.conf
