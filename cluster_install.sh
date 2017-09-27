@@ -46,7 +46,7 @@ sshpass -p "$mysqlpassword" scp mysql.sh $mysqlusername@$mysqlipaddress:~/
 sshpass -p "$mysqlpassword" ssh $mysqlusername@$mysqlipaddress chmod 777 /home/$mysqlusername/mysql.sh
 
 #run the script  on mysql server.
-sshpass -p "$mysqlpassword" ssh $mysqlusername@$mysqlipaddress /home/$mysqlusername/mysql.sh $mysqlpassword
+sshpass -p "$mysqlpassword" ssh $mysqlusername@$mysqlipaddress /home/$mysqlusername/mysql.sh $mysqlpassword $web1ipaddress $web2ipaddress
 
 #Copy the script to web 1
 sshpass -p "$web1password" scp web.sh $web1username@$web1ipaddress:~/ 
