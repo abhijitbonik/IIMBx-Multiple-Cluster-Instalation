@@ -31,3 +31,6 @@ mysql -uroot -proot -e " GRANT ALL ON *.* TO root@$2 IDENTIFIED BY 'root';"
 
 echo "Setting permisiion for Web2"
 mysql -uroot -proot -e " GRANT ALL ON *.* TO root@$3 IDENTIFIED BY 'root';"
+
+echo "Restarting Mysql"
+sudo -S <<< $1 /etc/init.d/mysql restart
